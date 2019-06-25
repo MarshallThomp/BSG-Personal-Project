@@ -16,8 +16,8 @@ export default function (state = initialState, action) {
         case LOGIN_USER + '_FULFILLED':
             return { ...state, data: payload.data }
         case LOGOUT_USER + '_FULFILLED':
-            return { ...state, data: null }
-        default: 
+            return { ...state }
+        default:
             return state
     }
 }
