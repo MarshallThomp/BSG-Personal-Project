@@ -8,17 +8,16 @@ class Navbar extends Component {
     render() {
         return (
             <div>
-                <nav class="navbar" >
-                    <label for="toggle" class="label" >
-                    <i class="fas fa-bars"></i>
+                <nav className="navbar" >
+                    <label htmlFor="toggle" className="label" >
+                    <i className="fas fa-bars"></i>
                     </label>
                     <input type="checkbox" id="toggle" />
                     <div className="menu">
-                        <a href="/">Home</a>
-                        <a href="/profile">Profile</a>
-                        <a href="/pets">Pets</a>
-                        <a href="/messages">Messages</a>
-                        <a href="/welcomePage" onClick={this.props.logout}>Logout</a>
+                        <a href="#/">Home</a>
+                        <a href="#/profile">Owner's Info</a>
+                        <a href="#/messages">Messages</a>
+                        <a href="#/welcomePage" onClick={this.props.logout}>Logout</a>
                     </div>
                 </nav>
             </div >

@@ -25,13 +25,6 @@ let mapStateToProps = state => {
 export default connect(mapStateToProps)(Header)
 
 let styles = {
-    header: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginLeft: 20
-    },
-
     bsg: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -40,17 +33,9 @@ let styles = {
     },
 
     logo: {
-        flex: 1,
-        display: 'flex',
-        justifyContent: 'flex-start ',
         height: 50,
-        marginRight: 10
-    },
-
-    navbar: {
-        flex: 1,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        margin: 0,
+        marginLeft: 30,
+        marginRight: 20
     }
 }
