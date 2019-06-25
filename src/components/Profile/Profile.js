@@ -19,6 +19,9 @@ class Profile extends Component{
                     <h3>{user.first_name} {user.last_name}</h3>
                     <h3>{user.email}</h3>
                 </div>
+                <div>
+                    <h2>The Pack</h2>
+                </div>
             </div>
         )
     }
