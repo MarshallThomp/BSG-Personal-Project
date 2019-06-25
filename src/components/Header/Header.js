@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import Navbar from '../Navbar/Navbar'
 import dog from './../../dog-solid.svg'
 
-import { Link } from 'react-router-dom'
-
 function Header(props) {
     return (
         <div style={styles.header}>
@@ -36,7 +34,7 @@ let styles = {
 
     bsg: {
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         margin: 0
     },
@@ -52,6 +50,7 @@ let styles = {
     navbar: {
         flex: 1,
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     }
 }

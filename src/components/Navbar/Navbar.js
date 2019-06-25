@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import './Navbar.css' 
 
 import { logout } from '../../redux/reducers/users'
 
@@ -7,8 +8,10 @@ class Navbar extends Component {
     render() {
         return (
             <div>
-                <nav class="navbar">
-                    <label for="toggle" class="label">&#9776;</label>
+                <nav class="navbar" >
+                    <label for="toggle" class="label" >
+                    <i class="fas fa-bars"></i>
+                    </label>
                     <input type="checkbox" id="toggle" />
                     <div className="menu">
                         <a href="/">Home</a>
