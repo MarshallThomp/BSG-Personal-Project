@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import LoginForm from './LoginForm'
+import LoginForm from '../LoginForm/LoginForm'
 import { connect } from 'react-redux'
-import RegisterForm from './RegisterForm';
+import RegisterForm from '../RegisterForm/RegisterForm';
 
 class WelcomePage extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class WelcomePage extends Component {
         }
     }
 
-    handleClick = () => {
+    toggleLogin = () => {
         this.state.signUp ? this.setState({signUp: false}) : this.setState({signUp: true})
     }
 
@@ -24,12 +24,7 @@ class WelcomePage extends Component {
         }
         return(
             <div>
-                { this.state.signUp ? <RegisterForm /> : <LoginForm />}
-                <div>
-                    <p>Don't have an account? {" "}
-                        <button onClick={this.handleClick}>Sign Up</button>
-                    </p>
-                </div>
+                { this.state.signUp ? <RegisterForm toggleLogin={this.toggleLogin}/> : <LoginForm toggleLogin={this.toggleLogin}/>}
             </div>
         )
     }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getUser } from './../redux/reducers/users'
+import { getUser } from '../../redux/reducers/users'
 import axios from 'axios'
 
 class RegisterForm extends Component {
@@ -19,16 +18,15 @@ class RegisterForm extends Component {
 
     handleChange = e => {
         let { name, value } = e.target
-        this.setState = {
+        this.setState( {
             [name]: value
-        }
+        })
     }
 
-    register() {
+    register  = () => {    
         const { first_name, last_name, email, image, password } = this.state;
-    
         axios
-          .post("/auth/register", { first_name, last_name, email, image, password })
+          .post("/auth/register", { image, first_name, last_name, email, password })
           .then(res => {
             this.props.getUser(res.data);
             this.props.history.push("/");
@@ -47,7 +45,8 @@ class RegisterForm extends Component {
                 name="image"
                 placeholder="image"
                 onChange={this.handleChange}
-                value={this.state.image} />
+                value={this.state.image}
+                />
                 <input 
                 type="text"
                 name="first_name"
@@ -72,7 +71,12 @@ class RegisterForm extends Component {
                 placeholder="password"
                 onChange={this.handleChange}
                 value={this.state.password} />
-                <button onClick={this.handleClick}>Register</button>
+                <button onClick={this.register}>Register</button>
+                <div>
+                    <p>Already have an account? {" "}
+                        <button onClick={this.props.toggleLogin}>Cancel</button>
+                    </p>
+                </div>
             </div>
         )
     }

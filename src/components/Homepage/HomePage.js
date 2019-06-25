@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getUser } from '../redux/reducers/users'
+import { getUser } from '../../redux/reducers/users'
 
 class Homepage extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     componentDidMount() {
         this.props.getUser()
     }
