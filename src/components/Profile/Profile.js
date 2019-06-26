@@ -1,27 +1,30 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getUser } from './../../redux/reducers/users'
+import { Link } from 'react-router-dom'
 
-class Profile extends Component{
+class Profile extends Component {
     constructor(props) {
         super(props)
     }
 
-    render(){
+    render() {
         let { user } = this.props
-        return(
+        return (
             <div>
-                <div>
-                    <img src={user.image} alt=""/>
-                    <button>Edit</button>
+                <div style={styles.profile}>
+                    <div>
+                        <img src={user.image} alt="" />
+                    </div>
+                    <div>
+                        <h3>{user.first_name} {user.last_name}</h3>
+                        <h3>{user.email}</h3>
+                    </div>
                 </div>
-                <div>
-                    <h3>{user.first_name} {user.last_name}</h3>
-                    <h3>{user.email}</h3>
-                </div>
-                <div>
-                    <h2>The Pack</h2>
-                </div>
+                <button>Edit</button>
+                <Link to="/">
+                    <button>Cancel</button>
+                </Link>
             </div>
         )
     }
@@ -33,3 +36,11 @@ let mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, { getUser })(Profile)
+
+let styles = {
+    profile: {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        alignItems: 'center'
+    }
+}
