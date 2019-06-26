@@ -4,6 +4,7 @@ const session = require('express-session')
 require('dotenv').config()
 
 const AuthCtrl = require('./controllers/auth')
+const DogCtrl = require('./controllers/dogController')
 
 const app = express()
 
@@ -30,3 +31,10 @@ app.post('/auth/register', AuthCtrl.register)
 app.post('/auth/login', AuthCtrl.login)
 app.get('/auth/logout', AuthCtrl.logout)
 app.get('/auth/currentUser', AuthCtrl.currentUser)
+
+//// Dog Endpoints ////
+app.get('/api/dogs/:id', DogCtrl.getDog)
+app.get('/api/dogs', DogCtrl.getAllDogs)
+app.post('/api/dogs', DogCtrl.createDog)
+app.delete('/api/dogs/:id', DogCtrl.deleteDog)
+app.put('/api/dogs/:id', DogCtrl.updateDog)

@@ -5,7 +5,7 @@ CREATE TABLE users (
     email VARCHAR,
     password VARCHAR,
     image TEXT
-)
+);
 
 CREATE TABLE dogs (
     id SERIAL PRIMARY KEY,
@@ -16,4 +16,7 @@ CREATE TABLE dogs (
     age INTEGER,
     vaccinated VARCHAR,
     fixed VARCHAR
-)
+);
+
+ALTER TABLE dogs
+ADD description VARCHAR;
