@@ -17,7 +17,7 @@ module.exports = {
 
             let dog = await db.dogs.get_dog(id)
             dog = dog[0]
-            
+
             res.status(200).send(dog)
         } catch (error) {
             console.log('there was an error', error)
@@ -29,10 +29,10 @@ module.exports = {
         try {
             const db = req.app.get('db')
             const { name, breed, image, age, vaccinated, fixed, description } = req.body
-            const { id } = req.session.user
-            console.log(id)
+            const { id: user_id } = req.session.user
+            console.log(user_id)
             let dogs = await db.dogs.create_dog({
-                id,
+                user_id,
                 name,
                 breed,
                 image,
@@ -41,6 +41,7 @@ module.exports = {
                 fixed,
                 description
             })
+            console.log(dogs)
 
             res.status(200).send(dogs)
         } catch (error) {
@@ -66,8 +67,7 @@ module.exports = {
     updateDog: async (req, res) => {
         try {
             const db = req.app.get('db')
-            const { id } = req.params
-            const {name, breed, image, age, vaccinated, fixed, description} = req.body
+            const { id, name, breed, image, age, vaccinated, fixed, description } = req.body
 
             let dogs = await db.dogs.update_dog({
                 id,
