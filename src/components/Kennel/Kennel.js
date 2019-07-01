@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getDogs } from './../../redux/reducers/dogs'
+import { getDogs, updateAllDogs } from './../../redux/reducers/dogs'
 import { Redirect, Link } from 'react-router-dom'
 import Doglist from '../DogList/Doglist'
 import axios from 'axios'
@@ -13,9 +13,8 @@ class Kennel extends Component {
 
     delete = id => {
         axios.delete(`/api/dogs/${id}`).then(res => {
-            this.setState({
-                dogs: res.data
-            })
+            this.props.updateAllDogs()
+            this.props.history.push("/kennel")
         })
     }
 
@@ -23,17 +22,25 @@ class Kennel extends Component {
         if (!this.props.user.id) {
             return <Redirect to="/welcomePage" />
         }
-        return (
+        
+        return this.props.user.id === this.props.dogs.user_id ? (
             <div>
                 <h1>The Kennel</h1>
+                <Doglist dogs={this.props.dogs} delete={this.delete} />
                 <p>Have a new friend?<br />
                     <Link to="/addDog">
                         Welcome them here!
                     </Link>
                 </p>
-                <Doglist dogs={this.props.dogs} delete={this.delete} />
+        </div> ) : (
+            <div>
+                <h2>Welcome Your First Friend Here!</h2>
+                <Link to="/addDog">
+                    <button style={styles.button}>+</button>
+                </Link>
             </div>
         )
+        
     }
 }
 
@@ -42,4 +49,14 @@ let mapStateToProps = state => {
     let { data: user } = state.user
     return { dogs, user }
 }
-export default connect(mapStateToProps, { getDogs })(Kennel)
+export default connect(mapStateToProps, { getDogs, updateAllDogs })(Kennel)
+
+let styles = {
+    button: {
+        border: '3px dashed black',
+        height: 100,
+        width: 100,
+        fontSize: 50,
+        backGround: '(255, 255, 255, 0.5)'
+    }
+}

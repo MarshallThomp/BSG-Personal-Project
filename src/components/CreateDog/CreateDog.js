@@ -28,7 +28,6 @@ class CreateDog extends Component {
     createDog = e => {
         e.preventDefault()
         const { name, breed, age, image, vaccinated, fixed, description } = this.state
-        console.log(this.state)
     
         axios.post(`/api/dogs`, { name, breed, age, image, vaccinated, fixed, description }).then(res => {
             this.props.getDog(res.data)
