@@ -30,7 +30,6 @@ module.exports = {
             const db = req.app.get('db')
             const { name, breed, image, age, vaccinated, fixed, description } = req.body
             const { id: user_id } = req.session.user
-            console.log(user_id)
             let dogs = await db.dogs.create_dog({
                 user_id,
                 name,
@@ -41,7 +40,6 @@ module.exports = {
                 fixed,
                 description
             })
-            console.log(dogs)
 
             res.status(200).send(dogs)
         } catch (error) {

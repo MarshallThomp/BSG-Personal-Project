@@ -12,6 +12,7 @@ const UPDATE_DOG = 'UPDATE_DOG'
 
 export default function (state = initialState, action) {
     let { type, payload } = action
+    console.log(payload)
     switch (type) {
         case GET_DOGS + '_PENDING':
             return { ...state, loading: true }
@@ -20,7 +21,7 @@ export default function (state = initialState, action) {
         case GET_DOG + '_PENDING':
             return { ...state, loading: true }
         case GET_DOG + '_FULFILLED':
-            return { ...state, loading: false, selected: payload.data }
+            return { ...state, loading: false, dogs: payload.data }
         case UPDATE_DOG + '_PENDING':
             return { ...state, loading: true }
         case UPDATE_DOG + '_FULFILLED':
@@ -37,10 +38,11 @@ export function getDogs() {
     }
 }
 
-export function getDog(id) {
+export function getDog(newDog) {
+    console.log(newDog)
     return {
         type: GET_DOG,
-        payload: axios.get(`/api/dogs/${id}`)
+        payload: axios.get(`/api/dogs`, newDog)
     }
 }
 

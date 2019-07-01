@@ -15,7 +15,7 @@ class DetailDog extends Component {
                 image: '',
                 age: 0,
                 vaccinated: '',
-                fixed: '0',
+                fixed: '',
                 description: '',
                 editing: false
             }
@@ -29,16 +29,10 @@ class DetailDog extends Component {
         })
     }
 
-    componentDidUpdate(prevState) {
-        if(prevState !== this.state) {
-            
-        }
-    }
-
     handleInput = e => {
         this.setState({
             dog: {
-                ...this.props.dog,
+                ...this.props.dog[0],
                 [e.target.name]: e.target.value
             }
         })
@@ -55,7 +49,6 @@ class DetailDog extends Component {
 
     update = e => {
         e.preventDefault();
-
         const {
             name,
             breed,
@@ -77,8 +70,8 @@ class DetailDog extends Component {
         })
 
         let updatedDog = this.state
-        console.log(updatedDog)
-        this.props.updateDog({...this.props.dog[0], ...updatedDog.dog})
+        this.props.updateDog({...this.props.dog[0], ...updatedDog.dog[0]})
+        // this.props.getDog(id)
     }
 
     toggleEdit = () => {
@@ -96,11 +89,14 @@ class DetailDog extends Component {
             fixed,
             description
         } = this.state.dog
-        // console.log(this.state)
-        return this.props.user.id === this.props.dog.user_id ? (this.state.editing ? (
-            <div>
-                <form 
-                onSubmit={this.update}>
+        return this.props.user.id === this.props.dog[0].user_id ? (this.state.editing ? (
+            <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center"
+              }}>
                     <label>Name</label>
                     <input
                     type='text'
@@ -118,29 +114,53 @@ class DetailDog extends Component {
                     onChange={this.handleInput}
                     required />
                     <label>Age</label>
-                    <input
+                    <select
                     type='number'
                     placeholder='Dog Age'
                     name='age'
                     value={age}
-                    onChange={this.handleAgeInput}
-                    required />
-                    <label>Vaccinated?</label>
-                    <input
+                    onChange={this.handleInput}
+                    required>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        year(s) old
+                    </select>
+                <label>Vaccinated: </label>
+                <select
                     type='text'
                     placeholder='Vaccinated'
                     name='vaccinated'
                     value={vaccinated}
                     onChange={this.handleInput}
-                    required />
-                    <label>Fixed?</label>
-                    <input
+                    required >
+                        <option>Vaccinated</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                <label>Fixed: </label>
+                <select
                     type='text'
                     placeholder='fixed ?'
                     name='fixed'
                     value={fixed}
                     onChange={this.handleInput}
-                    required />
+                    required>
+                        <option>Fixed</option>
+                        <option>Yes</option>
+                        <option>NO</option>
+                    </select>
                     <label>Description</label>
                     <input
                     type='text'
@@ -157,7 +177,6 @@ class DetailDog extends Component {
                     value={image}
                     onChange={this.handleInput}
                     required />
-                </form>
                 <button onClick={this.update}>Save</button>
                 <button onClick={this.toggleEdit}>Cancel</button>
             </div>
