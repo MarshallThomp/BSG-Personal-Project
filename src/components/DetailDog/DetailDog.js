@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getDog, updateDog } from './../../redux/reducers/dogs'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 class DetailDog extends Component {
     constructor(props) {
@@ -9,7 +10,7 @@ class DetailDog extends Component {
 
         this.state = {
             dog: {
-                id: 0,
+                dog_id: 0,
                 name: '',
                 breed: '',
                 image: '',
@@ -17,24 +18,25 @@ class DetailDog extends Component {
                 vaccinated: '',
                 fixed: '',
                 description: '',
+                user_id: 0,
                 editing: false
             }
         }
     }
 
-    
-
     componentDidMount() {
-        // this.props.getDog()
-        this.setState({
-            dog: this.props.dog[0]
+        let { id } = this.props.match.params
+        axios.get(`/api/dogs/${id}`).then(res => {
+            this.setState({
+                dog: res.data
+            })
         })
     }
 
     handleInput = e => {
         this.setState({
             dog: {
-                ...this.props.dog[0],
+                ...this.state.dog,
                 [e.target.name]: e.target.value
             }
         })
@@ -43,7 +45,7 @@ class DetailDog extends Component {
     handleAgeInput = e => {
         this.setState({
             dog: {
-                ...this.props.dog,
+                ...this.state.dog,
                 age: +e.target.value
             }
         })
@@ -51,28 +53,13 @@ class DetailDog extends Component {
 
     update = e => {
         e.preventDefault();
-        const {
-            name,
-            breed,
-            image,
-            age,
-            vaccinated,
-            fixed,
-            description } = this.state.dog
 
         this.setState({
-            name,
-            breed,
-            image,
-            age,
-            vaccinated,
-            fixed,
-            description,
             editing: false
         })
 
-        let updatedDog = this.state
-        this.props.updateDog({...this.props.dog[0], ...updatedDog.dog[0]})
+        let updatedDog = this.state.dog
+        this.props.updateDog(updatedDog)
         // this.props.getDog(id)
     }
 
@@ -82,6 +69,7 @@ class DetailDog extends Component {
     }
 
     render() {
+        console.log()
         const {
             name,
             breed,
@@ -121,7 +109,7 @@ class DetailDog extends Component {
                     placeholder='Dog Age'
                     name='age'
                     value={age}
-                    onChange={this.handleInput}
+                    onChange={this.handleAgeInput}
                     required>
                         <option>0</option>
                         <option>1</option>
@@ -137,7 +125,6 @@ class DetailDog extends Component {
                         <option>11</option>
                         <option>12</option>
                         <option>13</option>
-                        year(s) old
                     </select>
                 <label>Vaccinated: </label>
                 <select

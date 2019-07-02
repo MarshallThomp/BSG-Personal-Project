@@ -8,6 +8,7 @@ let initialState = {
 
 const GET_DOGS = 'GET_DOGS'
 const GET_DOG = 'GET_DOG'
+const GET_NEW_DOG = 'GET_NEW_DOG'
 const UPDATE_DOG = 'UPDATE_DOG'
 const UPDATE_ALL_DOGS = 'UPDATE_ALL_DOGS'
 
@@ -22,6 +23,10 @@ export default function (state = initialState, action) {
             return { ...state, loading: true }
         case GET_DOG + '_FULFILLED':
             return { ...state, loading: false, dogs: payload.data }
+        case GET_NEW_DOG + '_PENDING':
+            return { ...state, loading: true}
+        case GET_NEW_DOG + '_FULFILLED':
+            return { ... state, loading: false, dogs: payload.data}
         case UPDATE_DOG + '_PENDING':
             return { ...state, loading: true }
         case UPDATE_DOG + '_FULFILLED':
@@ -42,7 +47,14 @@ export function getDogs() {
     }
 }
 
-export function getDog(newDog) {
+export function getDog(id) {
+    return {
+        type: GET_DOG,
+        payload: axios.get(`/api/dogs/${id}`)
+    }
+}
+
+export function getNewDog(newDog){
     return {
         type: GET_DOG,
         payload: axios.get(`/api/dogs`, newDog)

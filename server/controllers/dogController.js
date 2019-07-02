@@ -65,7 +65,7 @@ module.exports = {
     updateDog: async (req, res) => {
         try {
             const db = req.app.get('db')
-            const { id, name, breed, image, age, vaccinated, fixed, description } = req.body
+            const { dog_id: id, name, breed, image, age, vaccinated, fixed, description } = req.body
 
             let dogs = await db.dogs.update_dog({
                 id,

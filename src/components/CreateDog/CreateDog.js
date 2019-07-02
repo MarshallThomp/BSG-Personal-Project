@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom'
-import { getDog } from './../../redux/reducers/dogs'
+import { getNewDog } from './../../redux/reducers/dogs'
 
 class CreateDog extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class CreateDog extends Component {
         const { name, breed, age, image, vaccinated, fixed, description } = this.state
     
         axios.post(`/api/dogs`, { name, breed, age, image, vaccinated, fixed, description }).then(res => {
-            this.props.getDog(res.data)
+            this.props.getNewDog(res.data)
             this.props.history.push("/kennel")
         }).catch(err => console.log(err))
     }
@@ -151,4 +151,4 @@ let mapStateToProps = state => {
     return { user }
 }
 
-export default connect(mapStateToProps, { getDog })(CreateDog)
+export default connect(mapStateToProps, { getNewDog })(CreateDog)

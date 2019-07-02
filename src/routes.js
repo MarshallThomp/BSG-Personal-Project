@@ -15,7 +15,7 @@ export default (
         <Route path="/register" component={RegisterForm} />
         <Route path="/profile" component={Profile} />
         <Route path="/kennel" component={Kennel} />
-        <Route path="/detail" component={Detail} />
+        <Route path="/detail/:id" component={Detail} />
         <Route path="/addDog" component={AddDog} />
     </Switch>
 )
