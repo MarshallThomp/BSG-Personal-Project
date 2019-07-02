@@ -22,6 +22,8 @@ class DetailDog extends Component {
         }
     }
 
+    
+
     componentDidMount() {
         // this.props.getDog()
         this.setState({

@@ -6,27 +6,40 @@ import { Link } from 'react-router-dom'
 class Profile extends Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            editing: false
+        }
+    }
+
+    toggleEdit = () => {
+        let { editing } = this.state
+        editing ? this.setState({ editing: false }) : this.setState({ editing: true })
     }
 
     render() {
         let { user } = this.props
-        return (
+        return this.state.editing ? (
             <div>
-                <div style={styles.profile}>
-                    <div>
-                        <img src={user.image} alt="" />
-                    </div>
-                    <div>
-                        <h3>{user.first_name} {user.last_name}</h3>
-                        <h3>{user.email}</h3>
-                    </div>
-                </div>
-                <button>Edit</button>
-                <Link to="/">
-                    <button>Cancel</button>
-                </Link>
+                update page
             </div>
-        )
+        ) : (
+                <div>
+                    <div style={styles.profile}>
+                        <div>
+                            <img src={user.image} alt="" />
+                        </div>
+                        <div>
+                            <h3>{user.first_name} {user.last_name}</h3>
+                            <h3>{user.email}</h3>
+                        </div>
+                    </div>
+                    <button>Edit</button>
+                    <Link to="/">
+                        <button>Cancel</button>
+                    </Link>
+                </div>
+            )
     }
 }
 

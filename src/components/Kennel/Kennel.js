@@ -18,15 +18,38 @@ class Kennel extends Component {
         })
     }
 
+    checkId = obj => {
+        if(obj.user_id === this.props.user.id) {
+            return obj
+        }
+    }
+
+    getId = dog => {
+        console.log(dog)
+        if(this.checkId(dog.user_id) && dog.user_id === this.props.user.id){
+            return true
+        }
+    }
+
     render() {
+        if(!this.props.dogs.length){
+            return( 
+                <div>
+                    loading
+                </div>
+            )
+        }
         if (!this.props.user.id) {
             return <Redirect to="/welcomePage" />
         }
+        let dogId = this.props.dogs.filter((dog) => {
+            return dog.user_id === this.props.user.id
+        })
         
-        return this.props.user.id === this.props.dogs.user_id ? (
+        return dogId.length ? (
             <div>
                 <h1>The Kennel</h1>
-                <Doglist dogs={this.props.dogs} delete={this.delete} />
+                <Doglist dogs={dogId} delete={this.delete} />
                 <p>Have a new friend?<br />
                     <Link to="/addDog">
                         Welcome them here!
