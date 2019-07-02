@@ -46,31 +46,35 @@ class RegisterForm extends Component {
                 placeholder="image"
                 onChange={this.handleChange}
                 value={this.state.image}
-                />
+                required />
                 <input 
                 type="text"
                 name="first_name"
                 placeholder="first name"
                 onChange={this.handleChange}
-                value={this.state.first_name} />
+                value={this.state.first_name}
+                required />
                 <input 
                 type="text"
                 name="last_name"
                 placeholder="last name"
                 onChange={this.handleChange}
-                value={this.state.last_name} />
+                value={this.state.last_name}
+                required />
                 <input 
                 type="text"
                 name="email"
                 placeholder="email"
                 onChange={this.handleChange}
-                value={this.state.email} />
+                value={this.state.email} 
+                required />
                 <input 
                 type="text"
                 name="password"
                 placeholder="password"
                 onChange={this.handleChange}
-                value={this.state.password} />
+                value={this.state.password} 
+                required />
                 <button onClick={this.register}>Register</button>
                 <div>
                     <p>Already have an account? {" "}

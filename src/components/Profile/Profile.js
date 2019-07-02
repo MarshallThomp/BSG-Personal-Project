@@ -8,8 +8,29 @@ class Profile extends Component {
         super(props)
 
         this.state = {
+            image: '',
+            firstName: '',
+            lastName: '',
+            email: '',
             editing: false
         }
+    }
+
+    handleInput = e => {
+        let { name, value} = e.target
+        this.setState({
+            ...this.state,
+            [name]: value
+        })
+    }
+
+    update = e => {
+        e.preventDefault()
+
+        this.setState({ editing: false })
+
+        let updatedUser = this.state
+        this.props.updateUser(updatedUser)
     }
 
     toggleEdit = () => {
@@ -27,7 +48,7 @@ class Profile extends Component {
                 <div>
                     <div style={styles.profile}>
                         <div>
-                            <img src={user.image} alt="" />
+                            <img src={user.image} alt=""  style={styles.image}/>
                         </div>
                         <div>
                             <h3>{user.first_name} {user.last_name}</h3>
@@ -54,6 +75,13 @@ let styles = {
     profile: {
         display: 'flex',
         justifyContent: 'space-evenly',
-        alignItems: 'center'
+        alignItems: 'center',
+        border: '1px solid black'
+    },
+
+    image: {
+        height: 150,
+        width: 225,
+        margin: 20
     }
 }

@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import DetailDog from '../DetailDog/DetailDog'
 
 class Dog extends Component {
     render() {
         const { id, user_id, name, image } = this.props.dog
-        console.log(id)
         return this.props.user.id === user_id ? (
             <div>
                 <h2>{name}</h2>

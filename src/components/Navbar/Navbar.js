@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getUser } from './../../redux/reducers/users'
+import bars from './../../bars-solid.svg'
 import './Navbar.css'
 
 import { logout } from '../../redux/reducers/users'
@@ -20,10 +21,10 @@ class Navbar extends Component {
                 </Link>
                 <nav className="navbar" >
                     <label htmlFor="toggle" className="label" >
-                        <i className="fas fa-bars"></i>
+                        <img src={bars} alt="" style={styles.bars}></img>
                     </label>
                     <input type="checkbox" id="toggle" />
-                    <div className="menu">
+                    <div className="menu" style={styles.menu}>
                         <a href="#/">Home</a>
                         <a href="#/kennel">The Kennel</a>
                         <a href="#/messages">Messages</a>
@@ -62,5 +63,11 @@ let styles = {
 
     userInfo: {
         margin: 0,
-    }
+    },
+
+    bars: {
+        height: 30,
+        width: 30,
+        marginTop: 30
+    },
 }
