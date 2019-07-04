@@ -1,56 +1,84 @@
-import React, { Component } from 'react'
-import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
+import React, { Component } from 'react';
+import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 
+import CurrentLocation from './Map';
 
-class MapContainer extends Component {
-    constructor(props){
-        super(props)
+export class MapContainer extends Component {
+    state = {
+        showingInfoWindow: false,
+        activeMarker: {},
+        selectedPlace: {}
+    };
 
-        this.state ={
-            showingInfoWindow: false,
-            activeMarker: {},
-            selectedPlace: {}
-        }
-    }
-
-    onMarkerClick = (props, marker, e) => {
+    onMarkerClick = (props, marker, e) =>
         this.setState({
             selectedPlace: props,
             activeMarker: marker,
             showingInfoWindow: true
-        })
-    }
-
-    onMapClicked = props => {
-        if(this.state.showingInfoWindow){
+        });
+        
+    onClose = props => {
+        if (this.state.showingInfoWindow) {
             this.setState({
                 showingInfoWindow: false,
                 activeMarker: null
-            })
+            });
         }
-    }
+    };
 
     
+
     render() {
         return (
-            <Map
+            <CurrentLocation
+                centerAroundCurrentLocation
                 google={this.props.google}
-                zoom={8}
-                style={mapStyles}
-                initialCenter={{ lat: 47.444, lng: -122.176 }}
             >
-                <Marker position={{ lat: 48.00, lng: -122.00 }} />
-            </Map>
-
-        )
+                <Marker 
+                onClick={this.onMarkerClick} 
+                name={'current location'} />
+                <InfoWindow
+                    marker={this.state.activeMarker}
+                    visible={this.state.showingInfoWindow}
+                    onClose={this.onClose}
+                >
+                    <div>
+                        <h4>{this.state.selectedPlace.name}</h4>
+                    </div>
+                </InfoWindow>
+                <Marker 
+                name={'Pilgrims Landing Park'}
+                position={{ lat: 40.436239, lng: -111.901673}}
+                onClick={this.onMarkerClick} />
+                <InfoWindow
+                    marker={this.state.activeMarker}
+                    visible={this.state.showingInfoWindow}
+                    onClose={this.onClose}
+                >
+                    <div>
+                        <h4>{this.state.selectedPlace.name}</h4>
+                    </div>
+                </InfoWindow>
+                <Marker 
+                name={'Olympic Park'}
+                position={{ lat: 40.409621, lng: -111.893518}}
+                onClick={this.onMarkerClick} />
+                <InfoWindow
+                    marker={this.state.activeMarker}
+                    visible={this.state.showingInfoWindow}
+                    onClose={this.onClose}
+                >
+                    <div>
+                        <h4>{this.state.selectedPlace.name}</h4>
+                    </div>
+                </InfoWindow>
+                
+            </CurrentLocation>
+        );
     }
 }
 
-export default GoogleApiWrapper({
-    apiKey: ''
-})(MapContainer);
 
-const mapStyles = {
-    width: '100%',
-    height: '100%',
-};
+export default GoogleApiWrapper({
+    apiKey: process.env.REACT_APP_GOOGLE_API_KEY
+})(MapContainer);

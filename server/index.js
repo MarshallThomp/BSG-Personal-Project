@@ -6,6 +6,7 @@ require('dotenv').config()
 
 const AuthCtrl = require('./controllers/auth')
 const DogCtrl = require('./controllers/dogController')
+const MarkCtrl = require('./controllers/markerController')
 
 const app = express()
 
@@ -46,15 +47,21 @@ app.post('/api/dogs', DogCtrl.createDog)
 app.delete('/api/dogs/:id', DogCtrl.deleteDog)
 app.put('/api/dogs', DogCtrl.updateDog)
 
+//// Marker Endpoints ////
+app.get('/api/markers', MarkCtrl.getAllMarkers)
+app.get('/api/markers/:id', MarkCtrl.getMarker)
+app.post('/api/markers', MarkCtrl.createMarker)
+app.delete('/api/markers/:id', MarkCtrl.deleteMarker)
+
 //// S3 ////
 app.post('/api/s3', (req, res) => {
     const photo = req.body
-    const buf = new Buffer(photo.file.replace(photo.file.replace(/^data:image\/\w+;base64,/, ''), 'base64'))
-
+    const file = photo.file.replace(/^data:image\/\w+;base64,/, '')
+    const buf = new Buffer.from(file, 'base64')
     const params = {
         Bucket: process.env.AWS_BUCKET,
         Body: buf,
-        Key: photo.filename,
+        Key: photo.fileName,
         ContentType: photo.fileType,
         ACL: 'public-read'
     }

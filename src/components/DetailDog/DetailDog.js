@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getDog, updateDog } from './../../redux/reducers/dogs'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import S3bucket from '../S3bucket/S3bucket'
 
 class DetailDog extends Component {
     constructor(props) {
@@ -66,6 +67,15 @@ class DetailDog extends Component {
     toggleEdit = () => {
         let { editing } = this.state
         editing ? this.setState({ editing: false }) : this.setState({ editing: true })
+    }
+
+    updateDogPic = url => {
+        this.setState({
+            dog: {
+                ...this.state.dog,
+                image: url
+            }
+        })
     }
 
     render() {
@@ -159,13 +169,14 @@ class DetailDog extends Component {
                     onChange={this.handleInput}
                     required />
                     <label>image</label>
-                    <input
+                    {/* <input
                     type='text'
                     placeholder='Dog Image'
                     name='image'
                     value={image}
                     onChange={this.handleInput}
-                    required />
+                    required /> */}
+                    <S3bucket updateDogPic={this.updateDogPic} />
                 <button onClick={this.update}>Save</button>
                 <button onClick={this.toggleEdit}>Cancel</button>
             </div>

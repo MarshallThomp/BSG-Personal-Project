@@ -3,6 +3,7 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom'
 import { getNewDog } from './../../redux/reducers/dogs'
+import S3bucket from './../S3bucket/S3bucket'
 
 class CreateDog extends Component {
     constructor(props) {
@@ -28,11 +29,17 @@ class CreateDog extends Component {
     createDog = e => {
         e.preventDefault()
         const { name, breed, age, image, vaccinated, fixed, description } = this.state
-    
+
         axios.post(`/api/dogs`, { name, breed, age, image, vaccinated, fixed, description }).then(res => {
             this.props.getNewDog(res.data)
             this.props.history.push("/kennel")
         }).catch(err => console.log(err))
+    }
+
+    setDogPic = url => {
+        this.setState({
+            image: url
+        })
     }
 
     render() {
@@ -42,7 +49,6 @@ class CreateDog extends Component {
         const {
             name,
             breed,
-            image,
             age,
             vaccinated,
             fixed,
@@ -130,13 +136,14 @@ class CreateDog extends Component {
                     onChange={this.handleInput}
                     required />
                 <label>image</label>
-                <input
+                {/* <input
                     type='text'
                     placeholder='Dog Image'
                     name='image'
                     value={image}
                     onChange={this.handleInput}
-                    required />
+                    required /> */}
+                <S3bucket setDogPic={this.setDogPic} />
                 <Link to="/kennel">
                     <button onClick={this.createDog}>Save</button>
                     <button >Cancel</button>

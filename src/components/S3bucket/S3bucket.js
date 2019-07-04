@@ -28,9 +28,8 @@ class S3bucket extends Component {
         reader.readAsDataURL(file)
     }
 
-    sendPhoto() {
-        return axios.put('/api/s3', this.state).then(res => {
-            console.log(this.props)
+    sendPhoto = () => {
+        return axios.post('/api/s3', this.state).then(res => {
             if(this.props.updateUserPic) {
                 console.log('Update User Pic')
                 this.props.updateUserPic(res.data.Location)
