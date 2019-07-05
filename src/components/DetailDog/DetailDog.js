@@ -79,7 +79,6 @@ class DetailDog extends Component {
     }
 
     render() {
-        console.log()
         const {
             name,
             breed,
@@ -89,7 +88,10 @@ class DetailDog extends Component {
             fixed,
             description
         } = this.state.dog
-        return this.props.user.id === this.props.dog[0].user_id ? (this.state.editing ? (
+
+        const dogId = this.props.dog.find(dog => dog.user_id === this.props.user.id)
+
+        return this.props.user.id === dogId.user_id ? (this.state.editing ? (
             <div
             style={{
                 display: "flex",

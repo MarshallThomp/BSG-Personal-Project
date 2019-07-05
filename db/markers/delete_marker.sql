@@ -1,4 +1,4 @@
 DELETE FROM locations
-WHERE id = $1;
+WHERE lat = ${lat} and lng = ${lng};
 
 SELECT * FROM locations;

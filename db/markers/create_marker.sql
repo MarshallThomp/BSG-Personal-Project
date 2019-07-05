@@ -1,7 +1,8 @@
-INSERT INTO locations (name, lat, lng)
+INSERT INTO locations (name, lat, lng, description)
 VALUES (
     ${name},
     ${lat},
-    ${lng}
+    ${lng},
+    ${description}
 )
 returning *;

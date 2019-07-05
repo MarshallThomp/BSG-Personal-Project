@@ -51,7 +51,7 @@ app.put('/api/dogs', DogCtrl.updateDog)
 app.get('/api/markers', MarkCtrl.getAllMarkers)
 app.get('/api/markers/:id', MarkCtrl.getMarker)
 app.post('/api/markers', MarkCtrl.createMarker)
-app.delete('/api/markers/:id', MarkCtrl.deleteMarker)
+app.delete('/api/markers/delete', MarkCtrl.deleteMarker)
 
 //// S3 ////
 app.post('/api/s3', (req, res) => {

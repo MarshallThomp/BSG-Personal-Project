@@ -28,6 +28,9 @@ CREATE TABLE locations ( --one to many
     lng DECIMAL
 );
 
+ALTER TABLE locations
+ADD description TEXT;
+
 CREATE TABLE markers ( -- many to many table
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),

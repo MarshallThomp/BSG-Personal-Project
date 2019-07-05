@@ -29,12 +29,13 @@ module.exports = {
     createMarker: async (req, res) => {
         try {
             const db = req.app.get('db')
-            const { name, lat, lng } = req.body
+            const { name, lat, lng, description } = req.body
             console.log(name)
             let markers = await db.markers.create_marker({
                 name,
                 lat,
-                lng
+                lng,
+                description
             })
             console.log(markers)
             res.status(200).send(markers)
@@ -44,17 +45,18 @@ module.exports = {
         }
     },
 
-    deleteMarker: async (req, res) => {
-        try {
-            const db = req.app.get('db')
-            const { id } = req.params
-            console.log(id)
-
-            let markers = await db.markers.delete_marker(id)
-            res.status(200).send(markers)
-        } catch (error) {
-            console.log('there was an error', error)
-            res.status(500).send(error)
-        }
+    deleteMarker: (req, res) => {
+        const db = req.app.get('db')
+        const { lat, lng } = req.query
+        console.log(req.query)
+        db.markers.delete_marker({
+            lat: lat,
+            lng: lng
+        }).then(() => {
+            res.sendStatus(200)
+        }).catch(err => {
+            console.log(err)
+        })
     }
+
 }

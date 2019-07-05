@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper, InfoWindow, Marker, Map } from 'google-maps-react';
 import axios from 'axios'
-import paw from './../../paw-solid.svg'
+import paw from './../../assets/the-paw.png'
 
 import CurrentLocation from './Map';
 
@@ -16,6 +16,7 @@ export class MapContainer extends Component {
         lat: '',
         lng: '',
         name: '',
+        description: '',
         selectedMarkerId: ''
     };
 
@@ -29,25 +30,23 @@ export class MapContainer extends Component {
     onClose = props => {
         if (this.state.showingInfoWindow) {
             this.setState({
-                showingInfoWindow: false,
-                activeMarker: null
+                showingInfoWindow: false
             });
         }
     };
 
     getMarkers = () => {
         axios.get('/api/markers').then(res => {
-            console.log(res.data)
             this.setState({ marker: res.data })
         })
     }
 
     postMarkers = () => {
-        console.log(this.state.lat, this.state.lng, this.state.name)
         axios.post('/api/markers', {
             lat: this.state.lat,
             lng: this.state.lng,
-            name: this.state.name
+            name: this.state.name,
+            description: this.state.description
         }).then(res => {
             console.log('put markers', res.data)
         }).catch(err => {
@@ -56,9 +55,15 @@ export class MapContainer extends Component {
         window.location.reload()
     }
 
-    // deleteMarker = () => {
-    //     axios.delete(`/api/markers/${id}`)
-    // }
+    deleteMarker = () => {
+        axios.delete(`/api/markers/delete?lat=${this.state.showInputPosition.lat}&lng=${this.state.showInputPosition.lng}`)
+        .then(res => {
+            console.log(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
+        window.location.reload()
+    }
 
     componentDidMount(){
         this.getMarkers()
@@ -66,6 +71,7 @@ export class MapContainer extends Component {
     }
 
     addMarkerClick = async (mapProps, map, clickEvent) => {
+        console.log('hit')
         const lat = clickEvent.latLng.lat()
         const lng = clickEvent.latLng.lng()
         await this.setState({
@@ -78,13 +84,10 @@ export class MapContainer extends Component {
         // console.log('click event lng', lng)
     }
 
-    openMarker = (props, marker) => {
-        console.log('mark lat', marker.position.lat())
-        console.log('mark lng', marker.position.lng())
-        console.log('open marker')
-        const lat = marker.latLng.lat()
-        const lng = marker.latLng.lng()
-        this.setState({
+    openMarker = async (props, marker) => {
+        const lat = marker.position.lat()
+        const lng = marker.position.lng()
+        await this.setState({
             activeMarker: marker,
             showingInfoWindow: true,
             showInputPosition: { lat, lng }
@@ -111,14 +114,15 @@ export class MapContainer extends Component {
                     key={i}
                     position={{ lat: marker.lat, lng: marker.lng }}
                     title={marker.name}
+                    description={marker.description}
                     id={marker.id}
                     onClick={this.openMarker}
                     notInDb={false}
-                // icon={{
-                //     img: paw,
-                //     anchor: new this.props.google.maps.Point(17, 38),
-                //     scaledSize: new this.props.google.maps.Size(30, 35),
-                //   }} 
+                icon={{
+                    url: paw,
+                    anchor: new this.props.google.maps.Point(17, 38),
+                    scaledSize: new this.props.google.maps.Size(30, 35),
+                  }} 
                 />
             )
         })
@@ -128,6 +132,7 @@ export class MapContainer extends Component {
             showInputPosition,
             activeMarker,
             name,
+            description
         } = this.state
 
         let mapStyle = {
@@ -142,6 +147,12 @@ export class MapContainer extends Component {
                         name='name'
                         value={name}
                         placeholder='Location Name'
+                        onChange={this.handleChange} />
+                        <input
+                        type='text'
+                        name='description'
+                        value={description}
+                        placeholder='Description'
                         onChange={this.handleChange} />
                 </div>
                 <div className='mapButtons' style={{background: 'purple', zIndex:5, marginBottom:10
@@ -161,11 +172,11 @@ export class MapContainer extends Component {
                         onClick={this.openMarker}
                         notInDb={true}
                         animation={window.google.maps.Animation.BOUNCE}
-                    // icon={{
-                    //     img: paw,
-                    //     anchor: new this.props.google.maps.Point(17, 38),
-                    //     scaledSize: new this.props.google.maps.Size(30, 35),
-                    // }}
+                        icon={{
+                            url: paw,
+                            anchor: new this.props.google.maps.Point(17, 38),
+                            scaledSize: new this.props.google.maps.Size(30, 35),
+                          }}
                     />
                     {markers}
                     <InfoWindow
@@ -179,8 +190,9 @@ export class MapContainer extends Component {
                             :
                             <div>
                                 <h5>
-                                    {activeMarker.name}
+                                    {activeMarker.title}
                                 </h5>
+                                <h5>{activeMarker.description}</h5>
                             </div>
                         }
                     </InfoWindow>
