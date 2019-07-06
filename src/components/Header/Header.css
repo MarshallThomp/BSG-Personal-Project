@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+.mainPageHeader {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    background: #4355fa;
+}
+
+.bsg {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 75px;
+    margin: 20px 25px;
+}

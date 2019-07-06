@@ -11,20 +11,20 @@ class Navbar extends Component {
     render() {
         let { user } = this.props
         return (
-            <div style={styles.navbar}>
-                <div style={styles.profile}>
-                    <p style={styles.userInfo}>{user.first_name},</p>
-                    <p style={styles.userInfo}>{user.email}</p>
+            <div className='nav'>
+                <div className='profile'>
+                    <p>{user.first_name},</p>
+                    <p>{user.email}</p>
                 </div>
                 <Link to={`/profile/${user.id}`}>
-                    <img src={user.image} alt="" style={styles.image} />
+                    <img src={user.image} alt="" className='userPhoto'/>
                 </Link>
                 <nav className="navbar" >
                     <label htmlFor="toggle" className="label" >
-                        <img src={bars} alt="" style={styles.bars}></img>
+                        <img className='bars' src={bars} alt=""></img>
                     </label>
                     <input type="checkbox" id="toggle" />
-                    <div className="menu" style={styles.menu}>
+                    <div className="menu" >
                         <a href="#/">Home</a>
                         <a href="#/kennel">The Kennel</a>
                         <a href="#/messages">Messages</a>
@@ -43,31 +43,31 @@ let mapStateToProps = state => {
 
 export default connect(mapStateToProps, { logout, getUser })(Navbar)
 
-let styles = {
-    navbar: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
+// let styles = {
+//     navbar: {
+//         display: 'flex',
+//         justifyContent: 'space-between',
+//         alignItems: 'center'
+//     },
 
-    image: {
-        height: 50,
-        width: 50,
-        borderRadius: 25
-    },
+//     image: {
+//         height: 50,
+//         width: 50,
+//         borderRadius: 25
+//     },
 
-    profile: {
-        marginRight: 10,
-        fontSize: 12
-    },
+//     profile: {
+//         marginRight: 10,
+//         fontSize: 12
+//     },
 
-    userInfo: {
-        margin: 0,
-    },
+//     userInfo: {
+//         margin: 0,
+//     },
 
-    bars: {
-        height: 30,
-        width: 30,
-        marginTop: 30
-    },
-}
+//     bars: {
+//         height: 30,
+//         width: 30,
+//         marginTop: 30
+//     },
+// }

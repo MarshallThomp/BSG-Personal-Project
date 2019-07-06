@@ -3,8 +3,6 @@ import { GoogleApiWrapper, InfoWindow, Marker, Map } from 'google-maps-react';
 import axios from 'axios'
 import paw from './../../assets/the-paw.png'
 
-import CurrentLocation from './Map';
-
 export class MapContainer extends Component {
     state = {
         showingInfoWindow: false,

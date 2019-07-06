@@ -2,6 +2,24 @@
     box-sizing: border-box
 }
 
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile {
+    margin: 0 20px;
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.userPhoto {
+    height: 60px;
+    width: 70px;
+    border-radius: 30px;
+}
+
 .navbar {
     height: 100px;
     position: relative;
@@ -16,19 +34,30 @@
     width: 50px;
 }
 
+.bars {
+    height: 30px;
+    width: 30px;
+    margin-top: 30px;
+}
+
 .menu {
     text-align: center;
-    width: 100px;
+    width: 220px;
     z-index: 100;
     display: none;
-    
+    position: absolute;
+    right: 0;
+    top: 100px;
+    font-size: 25px;
+    background: #4355fa;
+    border: 1px solid black;
 }
 
 .menu a{
     text-decoration: none;
     color: black;
     display: block;
-    margin: 0;
+    margin: 40px;
 }
 
 #toggle {
@@ -37,4 +66,7 @@
 
 #toggle:checked + .menu {
     display: block;
+}
+.profile p {
+    margin: 0;
 }
