@@ -28,23 +28,25 @@ class LoginForm extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <h1>Login</h1>
+                <h1>Login</h1>
+                <div className='loginPage'>
                     <input
+                        className='inp email'
                         type="text"
                         name="email"
                         placeholder="email"
                         onChange={this.handleChange} />
                     <input
+                        className='inp password'
                         type="text"
                         name="password"
                         placeholder="password"
                         onChange={this.handleChange} />
-                    <button onClick={this.handleClick}>Login</button>
                 </div>
+                    <button className='btn login' onClick={this.handleClick}>Login</button>
                 <div>
                     <p>Don't have an account? {" "}
-                        <button onClick={this.props.toggleLogin}>Sign Up</button>
+                        <button className='btn signUp' onClick={this.props.toggleLogin}>Sign Up</button>
                     </p>
                 </div>
             </div>

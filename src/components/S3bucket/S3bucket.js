@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import './S3bucket.css'
 
 class S3bucket extends Component {
     constructor(props) {
@@ -55,7 +56,7 @@ class S3bucket extends Component {
         return (
             <div>
                 <input type='file' id='real' onChange={this.handlePhoto} />
-                <button onClick={this.sendPhoto}>Upload</button>
+                <button className='btn' onClick={this.sendPhoto}>Upload</button>
             </div>
         )
     }

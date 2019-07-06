@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+}
+
+.registerPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inp {
+    width: 200px;
+    margin: 15px;
+    text-align: center;
+    border-radius: 15px;
+    border: 2px solid #b587e0;
+}
+
+.btn {
+    border-radius: 35px;
+    background: #85dddc;
+    width: 75px;
+    height: 25px;
+    font-family: 'Josefin Sans', sans-serif;
+    border: 1px solid #85dddc;
+    margin: 10px;
+}

@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getUser } from '../../redux/reducers/users'
 import MapContainer from '../MapContainer/MapContainer'
+import './Homepage.css'
 
 class Homepage extends Component {
     componentDidMount() {
@@ -13,7 +14,8 @@ class Homepage extends Component {
         let { user } = this.props
         return (
             <div>
-                {user ? <h1>Welcome, {user.first_name}</h1> : <Redirect to="/welcomePage" />}
+                {user ? <p className='intro'>Puppy Play Dates Near You!<br/> or <br/> Make Your Own Mark!</p> : <Redirect to="/welcomePage" />}
+                
                 <MapContainer />
             </div>
         )

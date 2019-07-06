@@ -13,7 +13,7 @@ class Navbar extends Component {
         return (
             <div className='nav'>
                 <div className='profile'>
-                    <p>{user.first_name},</p>
+                    <p style={{fontSize: '17px'}}>Welcome, {user.first_name}</p>
                     <p>{user.email}</p>
                 </div>
                 <Link to={`/profile/${user.id}`}>

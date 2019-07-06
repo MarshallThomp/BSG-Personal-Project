@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { GoogleApiWrapper, InfoWindow, Marker, Map } from 'google-maps-react';
 import axios from 'axios'
 import paw from './../../assets/the-paw.png'
+import './MapContainer.css'
 
 export class MapContainer extends Component {
     state = {
@@ -153,7 +154,7 @@ export class MapContainer extends Component {
                         placeholder='Description'
                         onChange={this.handleChange} />
                 </div>
-                <div className='mapButtons' style={{background: 'purple', zIndex:5, marginBottom:10
+                <div className='mapButtons' style={{zIndex:5, marginBottom:10
             }}>
                     <button className='btn mapSave' onClick={this.postMarkers}>save</button>
                     <button type='button' className='btn mapDelete' onClick={this.deleteMarker}>delete</button>

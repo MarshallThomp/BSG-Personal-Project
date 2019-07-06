@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
+.btn {
+    border-radius: 35px;
+    background: #85dddc;
+    width: 75px;
+    height: 25px;
+    font-family: 'Josefin Sans', sans-serif;
+    border: 1px solid #85dddc;
+    margin: 10px;
+}

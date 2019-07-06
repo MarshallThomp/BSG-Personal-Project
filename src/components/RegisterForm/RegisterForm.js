@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getUser } from '../../redux/reducers/users'
 import axios from 'axios'
 import S3bucket from './../S3bucket/S3bucket'
+import './RegisterForm.css'
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -45,7 +46,7 @@ class RegisterForm extends Component {
 
     render() {
         return (
-            <div>
+            <div className='registerPage'>
                 <h1>Register</h1>
                 {/* <input 
                 type="text"
@@ -54,8 +55,9 @@ class RegisterForm extends Component {
                 onChange={this.handleChange}
                 value={this.state.image}
                 required /> */}
-                <S3bucket setUserPic={this.setUserPic} />
+                <S3bucket className='upload' setUserPic={this.setUserPic} />
                 <input
+                    className='inp fn'
                     type="text"
                     name="first_name"
                     placeholder="first name"
@@ -63,6 +65,7 @@ class RegisterForm extends Component {
                     value={this.state.first_name}
                     required />
                 <input
+                    className='inp ln'
                     type="text"
                     name="last_name"
                     placeholder="last name"
@@ -70,6 +73,7 @@ class RegisterForm extends Component {
                     value={this.state.last_name}
                     required />
                 <input
+                    className='inp email'
                     type="text"
                     name="email"
                     placeholder="email"
@@ -77,16 +81,17 @@ class RegisterForm extends Component {
                     value={this.state.email}
                     required />
                 <input
+                    className='inp pw'
                     type="text"
                     name="password"
                     placeholder="password"
                     onChange={this.handleChange}
                     value={this.state.password}
                     required />
-                <button onClick={this.register}>Register</button>
+                <button className='btn registering' onClick={this.register}><b>Register</b></button>
                 <div>
                     <p>Already have an account? {" "}
-                        <button onClick={this.props.toggleLogin}>Cancel</button>
+                        <button className='btn cancel' onClick={this.props.toggleLogin}>Cancel</button>
                     </p>
                 </div>
             </div>
