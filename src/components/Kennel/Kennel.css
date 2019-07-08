@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+}
+
+.kennel {
+    position: relative;
+}
+
+.addDogInfo {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 25px;
+    right: 20px;
+}
+
+.createDog {
+    margin-right: 10px;
+    display: none;
+}
+
+.addDogBtn {
+    height: 50px;
+    width: 50px;
+    border: 1px solid #85dddc;
+    border-radius: 50%;
+    background: #85dddc;
+    color: white;
+    font-size: 35px;
+}
+
+.addDogBtn:hover {
+    background: white;
+    color: #85dddc;
+    transform: translateY(-1)
+}
+
+.addDogBtn:active {
+    transform: translateY(1)
+}

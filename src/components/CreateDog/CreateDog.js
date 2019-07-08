@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom'
 import { getNewDog } from './../../redux/reducers/dogs'
 import S3bucket from './../S3bucket/S3bucket'
+import './CreateDog.css'
 
 class CreateDog extends Component {
     constructor(props) {
@@ -55,98 +56,100 @@ class CreateDog extends Component {
             description
         } = this.state
         return (
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center"
-                }}>
+            <div className='createDogPage'>
                 <h1>PAWsent Your Dog!</h1>
-                <label>Name: </label>
-                <input
-                    type='text'
-                    placeholder='Dog Name'
-                    name='name'
-                    value={name}
-                    onChange={this.handleInput}
-                    required />
-                <label>Breed: </label>
-                <input
-                    type='text'
-                    placeholder='Dog Breed'
-                    name='breed'
-                    value={breed}
-                    onChange={this.handleInput}
-                    required />
-                <label>Age: </label>
-                <select
-                    type='number'
-                    placeholder='Dog Age'
-                    name='age'
-                    value={age}
-                    onChange={this.handleInput}
-                    required>
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
-                    <option>13</option>
-                    year(s) old
+                <div className='createDogInput'>
+                    <label>Name: </label>
+                    <input
+                        type='text'
+                        placeholder='Dog Name'
+                        name='name'
+                        value={name}
+                        onChange={this.handleInput}
+                        className='createInp createDogName'
+                        required />
+                    <label>Breed: </label>
+                    <input
+                        type='text'
+                        placeholder='Dog Breed'
+                        name='breed'
+                        value={breed}
+                        onChange={this.handleInput}
+                        className='createInp createDogBreed'
+                        required />
+                    <label>Age: </label>
+                    <select
+                        type='number'
+                        placeholder='Dog Age'
+                        name='age'
+                        value={age}
+                        onChange={this.handleInput}
+                        className='createInp createDogAge'
+                        required>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        year(s) old
                     </select>
-                <label>Vaccinated: </label>
-                <select
-                    type='text'
-                    placeholder='Vaccinated'
-                    name='vaccinated'
-                    value={vaccinated}
-                    onChange={this.handleInput}
-                    required >
-                    <option>Vaccinated</option>
-                    <option>Yes</option>
-                    <option>No</option>
-                </select>
-                <label>Fixed: </label>
-                <select
-                    type='text'
-                    placeholder='fixed ?'
-                    name='fixed'
-                    value={fixed}
-                    onChange={this.handleInput}
-                    required>
-                    <option>Fixed</option>
-                    <option>Yes</option>
-                    <option>No</option>
-                </select>
-                <label>Description: </label>
-                <input
-                    type='text'
-                    placeholder='description'
-                    name='description'
-                    value={description}
-                    onChange={this.handleInput}
-                    required />
-                <label>image</label>
-                {/* <input
+                    <label>Vaccinated: </label>
+                    <select
+                        type='text'
+                        placeholder='Vaccinated'
+                        name='vaccinated'
+                        value={vaccinated}
+                        onChange={this.handleInput}
+                        className='createInp createDogVac'
+                        required >
+                        <option>Vaccinated</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                    <label>Fixed: </label>
+                    <select
+                        type='text'
+                        placeholder='fixed ?'
+                        name='fixed'
+                        value={fixed}
+                        onChange={this.handleInput}
+                        className='createInp createDogFixed'
+                        required>
+                        <option>Fixed</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                    <label>Description: </label>
+                    <input
+                        type='text'
+                        placeholder='description'
+                        name='description'
+                        value={description}
+                        onChange={this.handleInput}
+                        className='createInp createDogDesc'
+                        required />
+                    <label>image</label>
+                    {/* <input
                     type='text'
                     placeholder='Dog Image'
                     name='image'
                     value={image}
                     onChange={this.handleInput}
                     required /> */}
-                <S3bucket setDogPic={this.setDogPic} />
+                    <S3bucket setDogPic={this.setDogPic} />
+                </div>
                 <Link to="/kennel">
-                    <button onClick={this.createDog}>Save</button>
-                    <button >Cancel</button>
+                    <button className='btn createDogSave' onClick={this.createDog}>Save</button>
+                    <button className='btn createDogCancel'>Cancel</button>
                 </Link>
             </div>
         )

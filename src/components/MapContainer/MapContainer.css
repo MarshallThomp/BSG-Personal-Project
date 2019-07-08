@@ -3,6 +3,19 @@
 }
 
 .inputBars {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    
+}
+
+.inputName {
+    margin-right: 10px;
+    text-align: center;
+}
+
+.inputLocation {
+    text-align: center;
 }
 
 .btn {
@@ -13,4 +26,13 @@
     font-family: 'Josefin Sans', sans-serif;
     border: 1px solid #85dddc;
     margin: 10px;
+}
+
+.btn:hover {
+    background: white;
+    transform: translateY(-1px)
+}
+
+.btn:active {
+    transform: translateY(1px)
 }

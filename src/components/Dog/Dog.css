@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+}
+
+.dogView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px auto;
+    border: 3px solid #85dddc;
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.dogInfo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dogViewName {
+    margin-right: 20px;
+}
+
+.dogViewPic {
+    height: 175px;
+    width: 175px;
+    border-radius: 20px;
+    margin-left: 20px;
+}
+
+.dogBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn.detailView {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+}
+
+.btn.deleteDog {
+    height: 30px;
+}

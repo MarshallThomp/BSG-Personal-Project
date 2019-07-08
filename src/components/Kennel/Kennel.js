@@ -4,6 +4,7 @@ import { getDogs, updateAllDogs } from './../../redux/reducers/dogs'
 import { Redirect, Link } from 'react-router-dom'
 import Doglist from '../DogList/Doglist'
 import axios from 'axios'
+import './Kennel.css'
 
 class Kennel extends Component {
 
@@ -18,22 +19,9 @@ class Kennel extends Component {
         })
     }
 
-    checkId = obj => {
-        if(obj.user_id === this.props.user.id) {
-            return obj
-        }
-    }
-
-    getId = dog => {
-        console.log(dog)
-        if(this.checkId(dog.user_id) && dog.user_id === this.props.user.id){
-            return true
-        }
-    }
-
     render() {
-        if(!this.props.dogs.length){
-            return( 
+        if (!this.props.dogs.length) {
+            return (
                 <div>
                     loading
                 </div>
@@ -45,25 +33,26 @@ class Kennel extends Component {
         let dogId = this.props.dogs.filter((dog) => {
             return dog.user_id === this.props.user.id
         })
-        
+
         return dogId.length ? (
-            <div>
+            <div className='kennel'>
                 <h1>The Kennel</h1>
                 <Doglist dogs={dogId} delete={this.delete} />
-                <p>Have a new friend?<br />
+                <div className='addDogInfo'>
+                    <p className='createDog'>Have a new friend?</p>
                     <Link to="/addDog">
-                        Welcome them here!
+                        <button className='addDogBtn'>+</button>
                     </Link>
-                </p>
-        </div> ) : (
-            <div>
-                <h2>Welcome Your First Friend Here!</h2>
-                <Link to="/addDog">
-                    <button style={styles.button}>+</button>
-                </Link>
-            </div>
-        )
-        
+                </div>
+            </div>) : (
+                <div>
+                    <h2>Welcome Your First Friend Here!</h2>
+                    <Link to="/addDog">
+                        <button style={styles.button}>+</button>
+                    </Link>
+                </div>
+            )
+
     }
 }
 

@@ -146,13 +146,17 @@ export class MapContainer extends Component {
                         name='name'
                         value={name}
                         placeholder='Location Name'
-                        onChange={this.handleChange} />
+                        onChange={this.handleChange} 
+                        className='inputName'
+                        required/>
                         <input
                         type='text'
                         name='description'
                         value={description}
                         placeholder='Description'
-                        onChange={this.handleChange} />
+                        onChange={this.handleChange} 
+                        className='inputLocation'
+                        required/>
                 </div>
                 <div className='mapButtons' style={{zIndex:5, marginBottom:10
             }}>
@@ -189,9 +193,9 @@ export class MapContainer extends Component {
                             :
                             <div>
                                 <h5>
-                                    {activeMarker.title}
+                                    Location Name: {activeMarker.title}
                                 </h5>
-                                <h5>{activeMarker.description}</h5>
+                                <h5>Info: {activeMarker.description}</h5>
                             </div>
                         }
                     </InfoWindow>

@@ -4,6 +4,7 @@ import { getDog, updateDog } from './../../redux/reducers/dogs'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import S3bucket from '../S3bucket/S3bucket'
+import './DetailDog.css'
 
 class DetailDog extends Component {
     constructor(props) {
@@ -92,37 +93,35 @@ class DetailDog extends Component {
         const dogId = this.props.dog.find(dog => dog.user_id === this.props.user.id)
 
         return this.props.user.id === dogId.user_id ? (this.state.editing ? (
-            <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center"
-              }}>
+            <div className='updatePage'>
+                <div className='updateInputs'>
                     <label>Name</label>
                     <input
-                    type='text'
-                    placeholder='Dog Name'
-                    name='name'
-                    value={name}
-                    onChange={this.handleInput}
-                    required />
+                        type='text'
+                        placeholder='Dog Name'
+                        name='name'
+                        value={name}
+                        onChange={this.handleInput}
+                        required
+                        className='uInp uName' />
                     <label>Breed</label>
                     <input
-                    type='text'
-                    placeholder='Dog Breed'
-                    name='breed'
-                    value={breed}
-                    onChange={this.handleInput}
-                    required />
+                        type='text'
+                        placeholder='Dog Breed'
+                        name='breed'
+                        value={breed}
+                        onChange={this.handleInput}
+                        className='uInp uBreed'
+                        required />
                     <label>Age</label>
                     <select
-                    type='number'
-                    placeholder='Dog Age'
-                    name='age'
-                    value={age}
-                    onChange={this.handleAgeInput}
-                    required>
+                        type='number'
+                        placeholder='Dog Age'
+                        name='age'
+                        value={age}
+                        onChange={this.handleAgeInput}
+                        className='uInp uAge'
+                        required>
                         <option>0</option>
                         <option>1</option>
                         <option>2</option>
@@ -138,38 +137,41 @@ class DetailDog extends Component {
                         <option>12</option>
                         <option>13</option>
                     </select>
-                <label>Vaccinated: </label>
-                <select
-                    type='text'
-                    placeholder='Vaccinated'
-                    name='vaccinated'
-                    value={vaccinated}
-                    onChange={this.handleInput}
-                    required >
+                    <label>Vaccinated: </label>
+                    <select
+                        type='text'
+                        placeholder='Vaccinated'
+                        name='vaccinated'
+                        value={vaccinated}
+                        onChange={this.handleInput}
+                        className='uInp uVac'
+                        required >
                         <option>Vaccinated</option>
                         <option>Yes</option>
                         <option>No</option>
                     </select>
-                <label>Fixed: </label>
-                <select
-                    type='text'
-                    placeholder='fixed ?'
-                    name='fixed'
-                    value={fixed}
-                    onChange={this.handleInput}
-                    required>
+                    <label>Fixed: </label>
+                    <select
+                        type='text'
+                        placeholder='fixed ?'
+                        name='fixed'
+                        value={fixed}
+                        onChange={this.handleInput}
+                        className='uInp uFixed'
+                        required>
                         <option>Fixed</option>
                         <option>Yes</option>
                         <option>NO</option>
                     </select>
                     <label>Description</label>
                     <input
-                    type='text'
-                    placeholder='description'
-                    name='description'
-                    value={description}
-                    onChange={this.handleInput}
-                    required />
+                        type='text'
+                        placeholder='description'
+                        name='description'
+                        value={description}
+                        onChange={this.handleInput}
+                        className='uInp uDesc'
+                        required />
                     <label>image</label>
                     {/* <input
                     type='text'
@@ -179,52 +181,57 @@ class DetailDog extends Component {
                     onChange={this.handleInput}
                     required /> */}
                     <S3bucket updateDogPic={this.updateDogPic} />
-                <button onClick={this.update}>Save</button>
-                <button onClick={this.toggleEdit}>Cancel</button>
+                </div>
+                <button className='btn uSave' onClick={this.update}>Save</button>
+                <button className='btn uCancel' onClick={this.toggleEdit}>Cancel</button>
             </div>
         ) : (
-            <div>
                 <div>
-                    <h1>{name}</h1>
-                    <h3>Breed: {breed}</h3>
-                    <h3>Age: {age}</h3>
-                    <h3>vaccinated: {vaccinated}</h3>
-                    <h3>Fixed: {fixed}</h3>
-                    <h3>Description: {description}</h3>
+                    <div className='detailDogView'>
+                        <div className='detailDogInfo'>
+                            <h1 style={{marginTop: 0}}>{name}</h1>
+                            <h3>Breed: {breed}</h3>
+                            <h3>Age: {age}</h3>
+                            <h3>vaccinated: {vaccinated}</h3>
+                            <h3>Fixed: {fixed}</h3>
+                            <h3>Description: {description}</h3>
+                        </div>
+                        <div className='detailDogImg'>
+                            <img className='dDogImg' src={image} alt="" />
+                        </div>
+                        <button className='btn uUpdate' onClick={this.toggleEdit}>Update</button>
+                        <Link to="/kennel">
+                            <button className='btn uReturn'>Return</button>
+                        </Link>
+                    </div>
                 </div>
-                <div>
-                    <img src={image} alt="" />
-                </div>
-                <button onClick={this.toggleEdit}>Update</button>
-                <Link to="/kennel">
-                    <button>Return</button>
-                </Link>
-            </div>
 
-        )) : (
-            <div>
+            )) : (
                 <div>
-                    <h1>{name}</h1>
-                    <h3>Breed: {breed}</h3>
-                    <h3>Age: {age}</h3>
-                    <h3>vaccinated: {vaccinated}</h3>
-                    <h3>Fixed: {fixed}</h3>
-                    <h3>Description: {description}</h3>
+                    <div className='detailDogView'>
+                        <div className='detailDogInfo'>
+                            <h1 style={{marginTop: 0}}>{name}</h1>
+                            <h3>Breed: {breed}</h3>
+                            <h3>Age: {age}</h3>
+                            <h3>vaccinated: {vaccinated}</h3>
+                            <h3>Fixed: {fixed}</h3>
+                            <h3>Description: {description}</h3>
+                        </div>
+                        <div className='detailDogImg'>
+                            <img src={image} alt="" />
+                        </div>
+                        <Link to="/kennel">
+                            <button className='btn uReturn'>Return</button>
+                        </Link>
+                    </div>
                 </div>
-                <div>
-                    <img src={image} alt="" />
-                </div>
-                <Link to="/kennel">
-                    <button>Return</button>
-                </Link>
-            </div>
-        )
+            )
     }
 }
 
 let mapStateToProps = state => {
     let { dogs: dog } = state.dogs
-    let { data: user} = state.user
+    let { data: user } = state.user
     return { dog, user }
 }
 
