@@ -30,6 +30,7 @@ class S3bucket extends Component {
     }
 
     sendPhoto = () => {
+        console.log('bucket hit', this.state.img)
         return axios.post('/api/s3', this.state).then(res => {
             if(this.props.updateUserPic) {
                 console.log('Update User Pic')

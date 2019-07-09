@@ -51,6 +51,8 @@ class CreateDog extends Component {
                 return <Redirect to='/welcomePage' />
             }
         }
+
+        console.log(this.state.image)
         const {
             name,
             breed,
