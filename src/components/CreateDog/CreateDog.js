@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom'
+import { getUser } from './../../redux/reducers/users'
 import { getNewDog } from './../../redux/reducers/dogs'
 import S3bucket from './../S3bucket/S3bucket'
 import './CreateDog.css'
@@ -44,8 +45,11 @@ class CreateDog extends Component {
     }
 
     render() {
-        if (!this.props.user.id) {
-            return <Redirect to="/welcomePage" />
+        if(!this.props.user) {
+            this.props.getUser()
+            if(!this.props.user){
+                return <Redirect to='/welcomePage' />
+            }
         }
         const {
             name,
@@ -161,4 +165,4 @@ let mapStateToProps = state => {
     return { user }
 }
 
-export default connect(mapStateToProps, { getNewDog })(CreateDog)
+export default connect(mapStateToProps, { getNewDog, getUser })(CreateDog)

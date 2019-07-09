@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getUser } from './../../redux/reducers/users'
 import { getDogs, updateAllDogs } from './../../redux/reducers/dogs'
 import { Redirect, Link } from 'react-router-dom'
 import Doglist from '../DogList/Doglist'
@@ -10,6 +11,7 @@ class Kennel extends Component {
 
     componentDidMount() {
         this.props.getDogs()
+        
     }
 
     delete = id => {
@@ -27,8 +29,12 @@ class Kennel extends Component {
                 </div>
             )
         }
-        if (!this.props.user.id) {
-            return <Redirect to="/welcomePage" />
+        console.log(this.props.user)
+        if (!this.props.user) {
+            this.props.getUser()
+            if(!this.props.user) {
+                return <Redirect to="/welcomePage" />
+            }
         }
         let dogId = this.props.dogs.filter((dog) => {
             return dog.user_id === this.props.user.id
@@ -61,7 +67,7 @@ let mapStateToProps = state => {
     let { data: user } = state.user
     return { dogs, user }
 }
-export default connect(mapStateToProps, { getDogs, updateAllDogs })(Kennel)
+export default connect(mapStateToProps, { getDogs, updateAllDogs, getUser })(Kennel)
 
 let styles = {
     button: {

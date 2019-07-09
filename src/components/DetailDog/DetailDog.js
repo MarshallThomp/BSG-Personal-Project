@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getUser } from './../../redux/reducers/users'
 import { getDog, updateDog } from './../../redux/reducers/dogs'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import S3bucket from '../S3bucket/S3bucket'
 import './DetailDog.css'
@@ -80,6 +81,12 @@ class DetailDog extends Component {
     }
 
     render() {
+        if(!this.props.user) {
+            this.props.getUser()
+            if(!this.props.user){
+                return <Redirect to='/welcomePage' />
+            }
+        }
         const {
             name,
             breed,
@@ -235,4 +242,4 @@ let mapStateToProps = state => {
     return { dog, user }
 }
 
-export default connect(mapStateToProps, { updateDog, getDog })(DetailDog)
+export default connect(mapStateToProps, { updateDog, getDog, getUser })(DetailDog)
