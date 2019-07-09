@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getUser } from './../../redux/reducers/users'
 import { getDogs, updateAllDogs } from './../../redux/reducers/dogs'
 import { Redirect, Link } from 'react-router-dom'
+import Header from './../../components/Header/Header'
 import Doglist from '../DogList/Doglist'
 import axios from 'axios'
 import './Kennel.css'
@@ -11,7 +12,7 @@ class Kennel extends Component {
 
     componentDidMount() {
         this.props.getDogs()
-        
+
     }
 
     delete = id => {
@@ -31,7 +32,7 @@ class Kennel extends Component {
         }
         if (!this.props.user) {
             this.props.getUser()
-            if(!this.props.user) {
+            if (!this.props.user) {
                 return <Redirect to="/welcomePage" />
             }
         }
@@ -40,14 +41,17 @@ class Kennel extends Component {
         })
 
         return dogId.length ? (
-            <div className='kennel'>
-                <h1>The Kennel</h1>
-                <Doglist dogs={dogId} delete={this.delete} />
-                <div className='addDogInfo'>
-                    <p className='createDog'>Have a new friend?</p>
-                    <Link to="/addDog">
-                        <button className='addDogBtn'>+</button>
-                    </Link>
+            <div>
+                <Header />
+                <div className='kennel'>
+                    <h1>The Kennel</h1>
+                    <Doglist dogs={dogId} delete={this.delete} />
+                    <div className='addDogInfo'>
+                        <p className='createDog'>Have a new friend?</p>
+                        <Link to="/addDog">
+                            <button className='addDogBtn'>+</button>
+                        </Link>
+                    </div>
                 </div>
             </div>) : (
                 <div>

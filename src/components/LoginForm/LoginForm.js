@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Header from './../../components/Header/Header'
 
 import { login } from './../../redux/reducers/users'
 
@@ -28,6 +29,7 @@ class LoginForm extends Component {
     render() {
         return (
             <div>
+                <Header />
                 <h1>Login</h1>
                 <div className='loginPage'>
                     <input

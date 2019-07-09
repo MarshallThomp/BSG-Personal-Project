@@ -13,8 +13,8 @@ class Navbar extends Component {
         return (
             <div className='nav'>
                 <div className='profile'>
-                    <p style={{fontSize: '17px'}}>Welcome, {user.first_name}</p>
-                    <p>{user.email}</p>
+                    <p className='pName' >Welcome, {user.first_name}</p>
+                    <p className='pEmail'>{user.email}</p>
                 </div>
                 <Link to={`/profile/${user.id}`}>
                     <img src={user.image} alt="" className='userPhoto'/>

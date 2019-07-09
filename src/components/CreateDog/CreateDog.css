@@ -18,30 +18,3 @@
     width: 200px;
 }
 
-.detailDogView {
-    margin: 20px;
-    border: 2px solid #85dddc;
-    padding: 10px;
-    border-radius: 20px;
-    position: relative;
-}
-
-.detailDogInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    font-size: 15px;
-}
-
-.detailDogImg {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-.dDogImg {
-    width: 150px;
-    height: 150px;
-    border-radius: 20px;
-}

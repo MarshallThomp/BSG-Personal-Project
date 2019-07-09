@@ -5,6 +5,7 @@ import { getDog, updateDog } from './../../redux/reducers/dogs'
 import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import S3bucket from '../S3bucket/S3bucket'
+import Header from './../../components/Header/Header'
 import './DetailDog.css'
 
 class DetailDog extends Component {
@@ -81,9 +82,9 @@ class DetailDog extends Component {
     }
 
     render() {
-        if(!this.props.user) {
+        if (!this.props.user) {
             this.props.getUser()
-            if(!this.props.user){
+            if (!this.props.user) {
                 return <Redirect to='/welcomePage' />
             }
         }
@@ -101,6 +102,7 @@ class DetailDog extends Component {
 
         return this.props.user.id === dogId.user_id ? (this.state.editing ? (
             <div className='updatePage'>
+                <Header />
                 <div className='updateInputs'>
                     <label>Name</label>
                     <input
@@ -194,9 +196,10 @@ class DetailDog extends Component {
             </div>
         ) : (
                 <div>
+                    <Header />
                     <div className='detailDogView'>
                         <div className='detailDogInfo'>
-                            <h1 style={{marginTop: 0}}>{name}</h1>
+                            <h1 style={{ marginTop: 0 }}>{name}</h1>
                             <h3>Breed: {breed}</h3>
                             <h3>Age: {age}</h3>
                             <h3>vaccinated: {vaccinated}</h3>
@@ -215,9 +218,10 @@ class DetailDog extends Component {
 
             )) : (
                 <div>
+                    <Header />
                     <div className='detailDogView'>
                         <div className='detailDogInfo'>
-                            <h1 style={{marginTop: 0}}>{name}</h1>
+                            <h1 style={{ marginTop: 0 }}>{name}</h1>
                             <h3>Breed: {breed}</h3>
                             <h3>Age: {age}</h3>
                             <h3>vaccinated: {vaccinated}</h3>
