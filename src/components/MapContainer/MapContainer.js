@@ -135,8 +135,9 @@ export class MapContainer extends Component {
         } = this.state
 
         let mapStyle = {
-            width: '100%',
-            height: '100%'
+            margin: "20px",
+            border: "3px solid #85dddc",
+            height: 500 
         }
         return (
             <main>

@@ -29,7 +29,6 @@ class Kennel extends Component {
                 </div>
             )
         }
-        console.log(this.props.user)
         if (!this.props.user) {
             this.props.getUser()
             if(!this.props.user) {

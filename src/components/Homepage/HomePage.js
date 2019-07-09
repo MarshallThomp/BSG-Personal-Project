@@ -14,9 +14,10 @@ class Homepage extends Component {
         let { user } = this.props
         return (
             <div>
-                {user ? <p className='intro'>Puppy Play Dates Near You!<br/> or <br/> Make Your Own Mark!</p> : <Redirect to="/welcomePage" />}
-                
-                <MapContainer />
+                {user ? <p className='intro'>Puppy Play Dates Near You!<br /> or <br /> Make Your Own Mark!</p> : <Redirect to="/welcomePage" />}
+                <div className='mapContainer'>
+                    <MapContainer />
+                </div>
             </div>
         )
     }
